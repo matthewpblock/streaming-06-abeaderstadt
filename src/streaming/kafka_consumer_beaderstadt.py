@@ -313,8 +313,14 @@ def process_message(  # noqa: D417
     enriched = enrich_message(row, region_lookup)
     customer_id = enriched.get("customer_id")
     region_id = enriched.get("region_id")
-    customer_type = "new" if enriched.get("is_new_customer") else "returning"
+    raw_is_new = enriched.get("is_new_customer", "")
+    is_new = str(raw_is_new).strip().lower() == "true"
+    customer_type = "new" if is_new else "returning"
     total = enriched["total"]
+
+    # -------------------------
+    # REAL-TIME AGGREGATIONS
+    # -------------------------
 
     if customer_id:
         customer_totals[customer_id] = customer_totals.get(customer_id, 0.0) + total
@@ -324,12 +330,21 @@ def process_message(  # noqa: D417
 
     if customer_type in customer_type_totals:
         customer_type_totals[customer_type] += total
+
+    # -------------------------
+    # DEBUG LOGGING
+    # -------------------------
+    LOG.info(f"is_new_customer raw = {raw_is_new} | parsed = {is_new}")
     LOG.info(
         f"subtotal={enriched['subtotal']}  "
         f"tax={enriched['tax_amount']}  "
         f"total={enriched['total']}  "
         f"running_total={stats.total + enriched['total']:.2f}"
     )
+
+    # -------------------------
+    # STATS + VISUALS
+    # -------------------------
 
     stats.update(enriched["total"])
 
@@ -544,11 +559,23 @@ def main() -> None:
             consumer.close()
             LOG.info("Kafka consumer closed.")
         with (OUTPUT_DIR / "analytics_summary_beaderstadt.json").open("w") as f:
+
+            def clean(d):
+                return {k: round(v, 2) for k, v in d.items()}
+
+            top_customers = dict(
+                sorted(customer_totals.items(), key=lambda x: x[1], reverse=True)[:10]
+            )
+
+            top_regions = dict(
+                sorted(region_totals.items(), key=lambda x: x[1], reverse=True)[:10]
+            )
+
             json.dump(
                 {
-                    "top_customers": customer_totals,
-                    "top_regions": region_totals,
-                    "customer_type_split": customer_type_totals,
+                    "top_customers": clean(top_customers),
+                    "top_regions": clean(top_regions),
+                    "customer_type_split": clean(customer_type_totals),
                 },
                 f,
                 indent=2,
