@@ -1,0 +1,15 @@
+{
+  "top_customers": {
+    "CUST-4150": 194.82,
+    "CUST-1106": 54.11,
+    "CUST-2133": 63.22
+  },
+  "top_regions": {
+    "US-TX": 248.93,
+    "CA-QC": 63.22
+  },
+  "customer_type_split": {
+    "new": 312.15,
+    "returning": 0.0
+  }
+}
