@@ -11,13 +11,13 @@ Run this AFTER to delete the topic and start fresh.
 Terminal commands to run from the root project folder:
 
   Create the topic (safe to run repeatedly):
-    uv run python -m streaming.admin
+    uv run python -m streaming.kafka_admin
 
   Delete the topic and recreate it (start fresh):
-    uv run python -m streaming.admin --recreate
+    uv run python -m streaming.kafka_admin --recreate
 
   Delete the topic only:
-    uv run python -m streaming.admin --delete
+    uv run python -m streaming.kafka_admin --delete
 
 OBS:
   Don't edit this file - it should remain a working example.

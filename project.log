@@ -5770,3 +5770,29 @@
 2026-06-15 15:35:27 | INFO | C06 | ========================
 2026-06-15 15:35:27 | INFO | C06 | Consumer executed successfully!
 2026-06-15 15:35:27 | INFO | C06 | ========================
+2026-06-15 16:32:17 | INFO | A02 | === RUN START ===
+2026-06-15 16:32:17 | INFO | A02 | project=A02
+2026-06-15 16:32:17 | INFO | A02 | repo_dir=streaming-06-scenarios
+2026-06-15 16:32:17 | INFO | A02 | python=3.14.3
+2026-06-15 16:32:17 | INFO | A02 | os=Windows 11
+2026-06-15 16:32:17 | INFO | A02 | shell=powershell
+2026-06-15 16:32:17 | INFO | A02 | cwd=.
+2026-06-15 16:32:17 | INFO | A02 | github_actions=False
+2026-06-15 16:32:17 | INFO | A02 | ========================
+2026-06-15 16:32:17 | INFO | A02 | START admin main()
+2026-06-15 16:32:17 | INFO | A02 | ========================
+2026-06-15 16:32:17 | INFO | A02 | KAFKA_BOOTSTRAP_SERVERS = localhost:9092
+2026-06-15 16:32:17 | INFO | A02 | KAFKA_TOPIC             = streaming-06-scenarios-beaderstadt
+2026-06-15 16:32:17 | INFO | A02 | KAFKA_GROUP_ID          = streaming-consumer-group-A
+2026-06-15 16:32:17 | INFO | A02 | KAFKA_AUTO_OFFSET_RESET = earliest
+2026-06-15 16:32:17 | INFO | A02 | MESSAGE_INTERVAL_SECONDS = 1.0
+2026-06-15 16:32:17 | INFO | A02 | MESSAGE_COUNT           = 6
+2026-06-15 16:32:17 | INFO | A02 | Verifying Kafka connection...
+2026-06-15 16:32:17 | INFO | A02 | Kafka port is reachable.
+2026-06-15 16:32:19 | INFO | A02 | Topics currently in Kafka: ['__consumer_offsets', 'streaming-06-scenarios-beaderstadt', 'streaming-06-scenarios-case']
+2026-06-15 16:32:19 | INFO | A02 | Topic 'streaming-06-scenarios-beaderstadt' already exists. No action needed.
+2026-06-15 16:32:19 | INFO | A02 | To start fresh, run:  uv run python -m streaming.admin --recreate
+2026-06-15 16:32:19 | INFO | A02 | Topics currently in Kafka: ['__consumer_offsets', 'streaming-06-scenarios-beaderstadt', 'streaming-06-scenarios-case']
+2026-06-15 16:32:19 | INFO | A02 | ========================
+2026-06-15 16:32:19 | INFO | A02 | Admin executed successfully!
+2026-06-15 16:32:19 | INFO | A02 | ========================
