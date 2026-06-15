@@ -571,11 +571,42 @@ def main() -> None:
                 sorted(region_totals.items(), key=lambda x: x[1], reverse=True)[:10]
             )
 
+            # -------------------------
+            # PHASE 5 ADDITIONS
+            # -------------------------
+
+            total_region_revenue = sum(region_totals.values())
+
+            region_performance = {}
+
+            for region, revenue in sorted(
+                region_totals.items(),
+                key=lambda x: x[1],
+                reverse=True,
+            ):
+                region_performance[region] = {
+                    "revenue": round(revenue, 2),
+                    "percent_of_total_revenue": round(
+                        (revenue / total_region_revenue) * 100,
+                        2,
+                    ),
+                }
+
+            top_region = max(
+                region_totals,
+                key=region_totals.get,
+                default=None,
+            )
+
             json.dump(
                 {
                     "top_customers": clean(top_customers),
                     "top_regions": clean(top_regions),
                     "customer_type_split": clean(customer_type_totals),
+                    # Phase 5 metrics
+                    "top_performing_region": top_region,
+                    "total_region_revenue": round(total_region_revenue, 2),
+                    "region_performance": region_performance,
                 },
                 f,
                 indent=2,
