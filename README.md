@@ -9,18 +9,56 @@ Alissa Beaderstadt - Graduate Student - Data Analytics
 
 > Streaming data analytics: complete pipeline.
 
-Streaming analytics requires working with data in motion
-and distributed, scalable systems.
-This course builds capabilities through working projects.
-In the age of generative AI, durable skills are grounded in real work:
-setting up a professional environment,
-reading and running code,
-understanding the logic,
-and pushing work to a shared repository.
-Each project follows the structure of professional Python projects.
-We learn by doing.
+## Project Overview
 
-## This Project
+This project extends the example Kafka streaming pipeline by adding real-time business
+analytics during message consumption.
+
+As sales transactions stream through Kafka, the consumer tracks:
+
+- Top customers by revenue
+- Top regions by revenue
+- Revenue from new vs. returning customers
+- Regional revenue performance rankings
+
+The consumer exports these analytics to a custom JSON summary file in addition to the standard CSV,
+DuckDB database, and live visualization outputs.
+
+## Key Findings
+
+In my sample run:
+
+- US-MO generated 53.81% of total revenue and was the top-performing region.
+- US-MO and US-TX together accounted for more than 72% of total sales.
+- Returning customers generated approximately 79% of total revenue.
+- The analytics summary identified the highest-value customers and regional sales patterns live.
+
+This project shows how streaming data can be transformed into business intelligence while
+transactions are actively being processed.
+
+## Custom Enhancements
+
+### Phase 4
+
+Added real-time aggregation logic to track:
+
+- Customer revenue totals
+- Regional revenue totals
+- Revenue by customer type (new vs. returning)
+
+The results are exported to analytics_summary_beaderstadt.json.
+
+### Phase 5
+
+Extended the analytics pipeline by calculating:
+
+- Regional revenue contribution percentages
+- Top-performing region
+- Ranked regional performance metrics
+
+These additions help answer business questions about geographic sales performance and customer behavior.
+
+## How the Project Works
 
 This project brings the full streaming analytics workflow together.
 
@@ -61,13 +99,6 @@ to complete:
 3. Phase 3. **Read & Understand**
 4. Phase 4. **Modify**
 5. Phase 5. **Apply**
-
-## Challenges
-
-Challenges are expected.
-Sometimes instructions may not quite match your operating system.
-When issues occur, share screenshots, error messages, and details about what you tried.
-Working through issues is part of implementing professional projects.
 
 ## Success
 
