@@ -80,14 +80,14 @@ The goal is to see how the parts work together in one complete scenario.
 
 Custom files include:
 
-- [data_contract_beaderstadt.py](src/streaming/data_validation/data_contract_beaderstadt.py)
-  - Extends the message validation process by applying custom validation checks for fields
-  such as quantity and unit price before records are processed by the consumer.
-
 - [kafka_consumer_beaderstadt.py](src/streaming/kafka_consumer_beaderstadt.py)
   - Adds real-time aggregation logic for customer revenue totals, region revenue totals, and new
   vs. returning customer revenue.
+  - Calculates regional contribution percentages and rankings.
   - Exports the final analytics summary to analytics_summary_beaderstadt.json.
+ 
+Supporting Beaderstadt files include derived_fields_beaderstadt.py and data_contract_beaderstadt.py, 
+which keep the project imports aligned with my custom consumer.
 
 
 ## Working Files
