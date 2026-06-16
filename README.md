@@ -78,6 +78,16 @@ This module combines the major skills from the course:
 
 The goal is to see how the parts work together in one complete scenario.
 
+Custom files include:
+
+- [derived_fields_beaderstadt.py](src/streaming/sata_engineering/derived_fields_beaderstadt.py)
+  - Computes the standard enriched sales fields used by the consumer, including subtotal, tax amount, and total.
+
+- [kafka_consumer_beaderstadt.py](src/streaming/kafka_consumer_beaderstadt.py)
+  - Adds real-time aggregation logic for customer revenue totals, region revenue totals, and new vs. returning customer revenue.
+  - Exports the final analytics summary to analytics_summary_beaderstadt.json.
+
+
 ## Working Files
 
 You'll work with just these areas:
