@@ -128,8 +128,8 @@ and processed data will appear in data/output/.
 The commands below are used in the workflow guide above.
 They are provided here for convenience.
 
-**Important:** the first few times you run a project,
-follow the guide with the **complete instructions**.
+**Important:** Follow the workflow guide the first time you run this project.
+It includes instructions for running the case example and then switching to the custom project.
 
 <details>
 <summary>Show command reference</summary>
@@ -140,14 +140,21 @@ After you get a copy of this repo in your own GitHub account,
 open a machine terminal in your `Repos` folder:
 
 ```bash
-# Replace username with YOUR GitHub username.
 git clone https://github.com/abeaderstadt/streaming-06-scenarios
 
 cd streaming-06-scenarios
 code .
 ```
 
+## Part A: Run the Case Example
+
+Follow these steps first to verify that Kafka and the example project are
+working correctly on your machine.
+
 ### In VS Code Terminal 1: Start Kafka (kafka)
+
+Begin by running the case example. After verifying the example works,
+follow the instructions below to run the custom Beaderstadt project.
 
 For full instructions see
 [**start kafka**](https://denisecase.github.io/pro-analytics-02/kafka/start-kafka/).
@@ -192,7 +199,9 @@ cd ~/kafka
 bin/kafka-server-start.sh config/server.properties
 ```
 
-### In VS Code terminal 2: Create Topic (topics)
+### In VS Code terminal 2: Create the Case Topic (topics)
+
+Create the example topic.
 
 For full instructions see
 [**create topic**](https://denisecase.github.io/pro-analytics-02/kafka/create-topic/).
@@ -203,7 +212,7 @@ The topic name must match the name defined in your
 Open another VS Code terminal. Rename it `topics`.
 If running Windows, specify the terminal type as **wsl** or
 type `wsl`.
-Run the commands one at a time.
+Run the commands one at a time starting with the case example.
 
 ```bash
 cd ~/kafka
@@ -215,55 +224,100 @@ bin/kafka-topics.sh --create \
   --topic streaming-06-scenarios-case
 ```
 
-### In VS Code Terminal 3: Run Project and Producer (producer)
+### In VS Code Terminal 3: Run the Case Producer (producer)
 
 Open another VS Code terminal. Rename it `producer`.
 If running Windows, use **PowerShell**.
 Run the commands one at a time.
 
 ```shell
-# reset uv cache only if/when you start getting strange dependency errors
-# uv cache clean
-
 uv self update
 uv python pin 3.14
 uv sync --extra dev --extra docs --upgrade
+```
 
-uvx pre-commit install
+**Optional (recommended for VS Code users):**
 
-git add -A
-uvx pre-commit run --all-files
-# repeat if changes were made
-git add -A
-uvx pre-commit run --all-files
+- Open the Command Palette (menu: View/Command Palette, or Ctrl+Shift+P)
+- Type and choose: Python: Select Interpreter
+- Choose the interpreter inside this project's .venv folder (usually .venv\Scripts\python.exe)
+- Open the Command Palette again (same as before)
+- Type or choose: Developer: Reload Window
 
-# run the producer
-clear
+Then use the following to run the example producer:
+
+```shell
 uv run python -m streaming.kafka_producer_case
+```
 
-# do chores
+### In VS Code Terminal 4: Run the Case Consumer
+
+Open another VS Code terminal. Rename it `consumer`.
+If running Windows, use **PowerShell**.
+Run the commands one at a time.
+Start with the example consumer.
+
+```shell
+uv run python -m streaming.kafka_consumer_case
+```
+
+## Part B: Run the Custom Beaderstadt Project
+
+After the case example is working, stop the case producer and consumer
+and switch to the custom project.
+
+### Step 1: Update the `.env` File
+
+Update the topic name in your .env file:
+
+KAFKA_TOPIC=streaming-06-scenarios-beaderstadt
+
+### Step 2: Create the Custom Topic (topics)
+
+You do not need to delete the example topic.
+Run the commands one at a time to create the custom topic:
+
+```bash
+cd ~/kafka
+
+bin/kafka-topics.sh --create \
+  --bootstrap-server localhost:9092 \
+  --partitions 1 \
+  --replication-factor 1 \
+  --topic streaming-06-scenarios-beaderstadt
+```
+
+### Step 3: Run the Custom Producer (producer)
+
+Clear the terminal (if needed) and run the custom producer using:
+
+```shell
+clear
+uv run python -m streaming.kafka_producer_beaderstadt
+```
+
+### Step 4: Run the Custom Consumer (consumer)
+
+Clear the terminal (if needed) and run the custom consumer using:
+
+```shell
+clear
+uv run python -m streaming.kafka_consumer_beaderstadt
+```
+
+### Optional Developer Commands
+
+These commands are useful if you are modifying the project but are not required for peer review.
+
+```bash
+uvx pre-commit install
+uvx pre-commit run --all-files
+
 uv run ruff format .
 uv run ruff check . --fix
 uv run python -m pyright
 uv run python -m pytest
 uv run python -m zensical build
-
-# save progress
-git add -A
-git commit -m "update"
-git push -u origin main
-```
-
-### In VS Code Terminal 4: Run Consumer (consumer)
-
-Open another VS Code terminal. Rename it `consumer`.
-If running Windows, use **PowerShell**.
-Run the commands one at a time.
-Clear the terminal, then start the consumer.
-
-```shell
-clear
-uv run python -m streaming.kafka_consumer_case
 ```
 
 To start fresh, see
