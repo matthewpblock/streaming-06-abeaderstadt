@@ -272,6 +272,10 @@ Update the topic name in your .env file:
 
 KAFKA_TOPIC=streaming-06-scenarios-beaderstadt
 
+Update the producer message count to 30:
+
+PRODUCER_MESSAGE_COUNT=30
+
 ### Step 2: Create the Custom Topic (topics)
 
 You do not need to delete the example topic.
