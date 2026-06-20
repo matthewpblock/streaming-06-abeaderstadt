@@ -24,7 +24,7 @@ In this project one local broker handles all topics.
 ### Consumer
 
 A Python program that reads messages from a Kafka topic.
-See `kafka_consumer_case.py`.
+See `kafka_consumer_beaderstadt.py`.
 
 ### Consumer Group
 
@@ -56,7 +56,7 @@ This project uses one partition per topic for local development.
 ### Producer
 
 A Python program that sends messages to a Kafka topic.
-See `kafka_producer_case.py`.
+See `kafka_producer_beaderstadt.py`.
 
 ### Topic
 
@@ -70,13 +70,13 @@ Configured in `.env` as `KAFKA_TOPIC`.
 ### Data Contract
 
 A formal specification of the fields, types, and rules a valid message must follow.
-Defined in `data_validation/data_contract_case.py`.
+Defined in `data_validation/data_contract_beaderstadt.py`.
 
 ### Derived Fields
 
 Fields calculated by the consumer from raw message values and reference data.
 Examples include `subtotal`, `tax_amount`, and `total`.
-See `data_engineering/derived_fields.py`.
+See `data_engineering/derived_fields_beaderstadt.py`.
 
 ### Reference Data
 
